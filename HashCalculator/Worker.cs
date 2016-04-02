@@ -11,8 +11,18 @@ namespace HashCalculator
 {
     class Worker
     {
-        public static string[] GetHashingAlgorithms()
+        public static string[] GetHashingAlgorithms(bool onlySHA = false)
         {
+            if (onlySHA)
+            {
+                return new[] {
+                    HashAlgorithmNames.Sha1,
+                    HashAlgorithmNames.Sha256,
+                    HashAlgorithmNames.Sha384,
+                    HashAlgorithmNames.Sha512
+                    };
+            }
+
             return new[] {
                 HashAlgorithmNames.Md5,
                 HashAlgorithmNames.Sha1,
@@ -20,6 +30,24 @@ namespace HashCalculator
                 HashAlgorithmNames.Sha384,
                 HashAlgorithmNames.Sha512
                 };
+        }
+
+        public static uint GetDigestSizeForAlgorithm(string algorithm)
+        {
+            return HashAlgorithmProvider.OpenAlgorithm(algorithm).HashLength;
+        }
+
+        public static string GetZeroDigestForAlgorithm(string algorithm)
+        {
+            uint digestSize = GetDigestSizeForAlgorithm(algorithm);
+
+            byte[] zeroDigest = new byte[digestSize];
+            Array.Clear(zeroDigest, 0, (int)digestSize);
+
+            var buffer = CryptographicBuffer.CreateFromByteArray(zeroDigest);
+            var ret = CryptographicBuffer.EncodeToHexString(buffer);
+
+            return ret;
         }
 
         public static byte[] ComputeHash(string algorithm, byte[] input)

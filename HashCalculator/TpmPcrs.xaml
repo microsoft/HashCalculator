@@ -16,7 +16,7 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource MediumWindowSnapPoint}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="ContentList.Margin" Value="12,0,0,0"/>
+                        <Setter Target="LayoutRoot.Margin" Value="12,0,0,0"/>
                         <Setter Target="title.Style" Value="{StaticResource PageTitleTextBlockStyle}"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -25,7 +25,7 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource MinWindowSnapPoint}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="ContentList.Margin" Value="0"/>
+                        <Setter Target="LayoutRoot.Margin" Value="0"/>
                         <Setter Target="title.Style" Value="{StaticResource NarrowPageTitleTextBlockStyle}"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -39,47 +39,37 @@
 
         <ctl:PageHeader>
             <ctl:PageHeader.HeaderContent>
-                <TextBlock x:Name="title" Style="{StaticResource PageTitleTextBlockStyle}" Text="Drill-in Page"/>
+                <TextBlock x:Name="title" Style="{StaticResource PageTitleTextBlockStyle}" Text="TPM PCR"/>
             </ctl:PageHeader.HeaderContent>
         </ctl:PageHeader>
 
-        <ListView x:Name="ContentList"
-                Grid.Row="1"
-                Header="Click An Item To Drill In"
-                EntranceNavigationTransitionInfo.IsTargetElement="True"
-                IsItemClickEnabled="True"
-                Margin="24,0,0,0">
-            <ListView.HeaderTemplate>
-                <DataTemplate>
-                    <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="12,4" Text="{Binding}"/>
-                </DataTemplate>
-            </ListView.HeaderTemplate>
-            <ListViewItem>Item 1</ListViewItem>
-            <ListViewItem>Item 2</ListViewItem>
-            <ListViewItem>Item 3</ListViewItem>
-            <ListViewItem>Item 4</ListViewItem>
-            <ListViewItem>Item 5</ListViewItem>
-            <ListViewItem>Item 6</ListViewItem>
-            <ListViewItem>Item 7</ListViewItem>
-            <ListViewItem>Item 8</ListViewItem>
-            <ListViewItem>Item 9</ListViewItem>
-            <ListViewItem>Item 10</ListViewItem>
-            <ListViewItem>Item 11</ListViewItem>
-            <ListViewItem>Item 12</ListViewItem>
-            <ListViewItem>Item 13</ListViewItem>
-            <ListViewItem>Item 14</ListViewItem>
-            <ListViewItem>Item 15</ListViewItem>
-            <ListViewItem>Item 16</ListViewItem>
-            <ListViewItem>Item 17</ListViewItem>
-            <ListViewItem>Item 18</ListViewItem>
-            <ListViewItem>Item 19</ListViewItem>
-            <ListViewItem>Item 20</ListViewItem>
-            <ListViewItem>Item 21</ListViewItem>
-            <ListViewItem>Item 22</ListViewItem>
-            <ListViewItem>Item 23</ListViewItem>
-            <ListViewItem>Item 24</ListViewItem>
-            <ListViewItem>Item 25</ListViewItem>
-        </ListView>
+        <ScrollViewer x:Name="LayoutRoot"
+                      Grid.Row="1" 
+                      Margin="24,0,0,0">
+            <StackPanel>
+                <Grid Margin="0,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
+                    <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Name="Description" HorizontalAlignment="Left" Margin="20,10,20,10" TextWrapping="Wrap" Text="Current PCR value:" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Top"/>
+                    <TextBox Grid.Row="1" Grid.ColumnSpan="2" x:Name="PCR" Margin="20,10" Width="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" IsReadOnly="True" PlaceholderText="Current PCR value" />
+                    <ComboBox Grid.Row="2" Grid.Column="0" x:Name="ListOfAlgorithms"  Margin="20,10" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+                    <Button Grid.Row="2" Grid.Column="1" x:Name="ResetPcr" Content="Reset" Margin="0,10,20,10" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="ResetPcr_Click" />
+                    <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Name="InputDescription" HorizontalAlignment="Left" Margin="20,10,20,10" TextWrapping="Wrap" Text="Insert binary data to extend here:" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Top"/>
+                    <TextBox Grid.Row="4" Grid.ColumnSpan="2" x:Name="Input" Margin="20,10" Width="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" PlaceholderText="Input binary data to extend here" />
+                    <Button Grid.Row="5" Grid.ColumnSpan="2" Content="Extend" HorizontalAlignment="Stretch" Margin="20,10,20,10" VerticalAlignment="Top" />
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

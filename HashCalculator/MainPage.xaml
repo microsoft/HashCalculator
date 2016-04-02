@@ -43,7 +43,7 @@
             </ctl:PageHeader.HeaderContent>
         </ctl:PageHeader>
 
-        <ScrollViewer x:Name="Layoutroot"
+        <ScrollViewer x:Name="LayoutRoot"
                       Grid.Row="1" 
                       Margin="24,0,0,0">
             <StackPanel>
