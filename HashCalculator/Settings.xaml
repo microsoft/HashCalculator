@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="HashCalculator.Views.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HashCalculator"
+    xmlns:ctl="using:HashCalculator.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource MediumWindowSnapPoint}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Layoutroot.Margin" Value="12,0,0,0"/>
+                        <Setter Target="title.Style" Value="{StaticResource PageTitleTextBlockStyle}"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource MinWindowSnapPoint}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LayoutRoot.Margin" Value="0"/>
+                        <Setter Target="title.Style" Value="{StaticResource NarrowPageTitleTextBlockStyle}"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ctl:PageHeader>
+            <ctl:PageHeader.HeaderContent>
+                <TextBlock x:Name="title" Style="{StaticResource PageTitleTextBlockStyle}" Text="Settings"/>
+            </ctl:PageHeader.HeaderContent>
+        </ctl:PageHeader>
+
+        <ScrollViewer x:Name="LayoutRoot"
+                      Grid.Row="1" 
+                      Margin="24,0,0,0">
+            <StackPanel>
+                <Grid Margin="0,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <CheckBox Grid.Row="0" x:Name="DontShowLandingPage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,10" ToolTipService.ToolTip="Don't Show Landind page" Content="Don't Show Landing Page" Checked="DontShowLandingPage_Checked" Unchecked="DontShowLandingPage_Checked" />
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

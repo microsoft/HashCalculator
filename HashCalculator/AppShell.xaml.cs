@@ -35,6 +35,12 @@ namespace HashCalculator
                     Label = "TPM PCRs",
                     DestPage = typeof(TpmPcrs)
                 },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.Setting,
+                    Label = "Settings",
+                    DestPage = typeof(Settings)
+                },
             });
 
         public static AppShell Current = null;
@@ -266,7 +272,7 @@ namespace HashCalculator
         public void OpenNavePane()
         {
             TogglePaneButton.IsChecked = true;
-            NavPaneDivider.Visibility = Visibility.Visible;
+            //NavPaneDivider.Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -276,7 +282,7 @@ namespace HashCalculator
         /// <param name="args"></param>
         private void RootSplitView_PaneClosed(SplitView sender, object args)
         {
-            NavPaneDivider.Visibility = Visibility.Collapsed;
+            //NavPaneDivider.Visibility = Visibility.Collapsed;
         }
 
         /// <summary>
@@ -298,7 +304,7 @@ namespace HashCalculator
         /// <param name="e"></param>
         private void TogglePaneButton_Checked(object sender, RoutedEventArgs e)
         {
-            NavPaneDivider.Visibility = Visibility.Visible;
+            //NavPaneDivider.Visibility = Visibility.Visible;
             this.CheckTogglePaneButtonSizeChanged();
         }
 

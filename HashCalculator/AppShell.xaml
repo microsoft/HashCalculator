@@ -442,41 +442,27 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="6"/>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="48"/>
-                        <ColumnDefinition Width="48"/>
-                    </Grid.ColumnDefinitions>
 
                     <!-- A custom ListView to display the items in the pane.  The automation Name is set in the ContainerContentChanging event. -->
                     <controls:NavMenuListView x:Name="NavMenuList"
-                                          Grid.ColumnSpan="3"
-                                          TabIndex="3"
+                                          TabIndex="2"
                                           Margin="0,52,0,0"
                                           ContainerContentChanging="NavMenuItemContainerContentChanging"
                                           ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
                                           ItemTemplate="{StaticResource NavMenuItemTemplate}"
                                           ItemInvoked="NavMenuList_ItemInvoked"/>
-                    <Rectangle x:Name="NavPaneDivider"
+                    <!--<Rectangle x:Name="NavPaneDivider"
                                Grid.Row="1"
-                               Grid.ColumnSpan="3"
                                Height="1"
                                Fill="{ThemeResource SystemControlForegroundBaseLowBrush}"
-                               Margin="16,0,16,6"/>
-                    <!--<Button x:Name="FeedbackNavPaneButton"
+                               Margin="16,0,16,6"/>-->
+                    <!--<Button x:Name="SettingsNavPaneButton"
+                            TabIndex="3"
                             Grid.Row="2"
-                            Grid.Column="1"
-                            Style="{StaticResource SplitViewPaneButtonStyle}"
-                            Content="&#xE76E;"
-                            AutomationProperties.Name="Feedback"
-                            ToolTipService.ToolTip="Feedback"/>-->
-                    <Button x:Name="SettingsNavPaneButton"
-                            Grid.Row="2"
-                            Grid.Column="2"
                             Style="{StaticResource SplitViewPaneButtonStyle}"
                             Content="&#xE713;"
                             AutomationProperties.Name="Settings"
-                            ToolTipService.ToolTip="Settings"/>
+                            ToolTipService.ToolTip="Settings"/>-->
                 </Grid>
             </SplitView.Pane>
 
