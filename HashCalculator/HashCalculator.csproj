@@ -99,7 +99,6 @@
     <None Include="HashCalculator_StoreKey.pfx" />
     <None Include="HashCalculator_TemporaryKey.pfx" />
     <None Include="project.json" />
-    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
