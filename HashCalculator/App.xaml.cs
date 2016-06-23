@@ -7,6 +7,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 using HashCalculator.Views;
+using Windows.Storage;
 
 namespace HashCalculator
 {
@@ -79,9 +80,23 @@ namespace HashCalculator
 
             if (shell.AppFrame.Content == null)
             {
-                // When the navigation stack isn't restored, navigate to the first page
-                // suppressing the initial entrance animation.
-                shell.AppFrame.Navigate(typeof(LandingPage), e.Arguments, new Windows.UI.Xaml.Media.Animation.SuppressNavigationTransitionInfo());
+                ApplicationDataContainer roamingSettings = ApplicationData.Current.RoamingSettings;
+                const string DontShowLandingPageSetting = "DontShowLandingPage";
+
+                if (roamingSettings.Values[DontShowLandingPageSetting] != null &&
+                    roamingSettings.Values[DontShowLandingPageSetting].Equals(true.ToString()))
+                {
+                    // When the navigation stack isn't restored, navigate to the first page
+                    // suppressing the initial entrance animation. Because landing page is disabled,
+                    // got to first content page.
+                    shell.AppFrame.Navigate(typeof(MainPage), e.Arguments, new Windows.UI.Xaml.Media.Animation.SuppressNavigationTransitionInfo());
+                }
+                else
+                {
+                    // When the navigation stack isn't restored, navigate to the first page
+                    // suppressing the initial entrance animation.
+                    shell.AppFrame.Navigate(typeof(LandingPage), e.Arguments, new Windows.UI.Xaml.Media.Animation.SuppressNavigationTransitionInfo());
+                }
             }
 
             // Ensure the current window is active

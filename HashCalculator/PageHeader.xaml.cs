@@ -35,4 +35,3 @@ namespace HashCalculator.Controls
             DependencyProperty.Register("HeaderContent", typeof(UIElement), typeof(PageHeader), new PropertyMetadata(DependencyProperty.UnsetValue));
     }
 }
-

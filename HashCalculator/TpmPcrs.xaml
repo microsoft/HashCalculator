@@ -6,6 +6,7 @@
     xmlns:ctl="using:HashCalculator.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    KeyDown="TpmPcr_KeyDown"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -55,19 +56,21 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Name="Description" HorizontalAlignment="Left" Margin="20,10,20,10" TextWrapping="Wrap" Text="Current PCR value:" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Top"/>
+                    <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Name="Description" HorizontalAlignment="Left" Margin="20,10" TextWrapping="Wrap" Text="Current PCR value:" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Top"/>
                     <TextBox Grid.Row="1" Grid.ColumnSpan="2" x:Name="PCR" Margin="20,10" Width="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" IsReadOnly="True" PlaceholderText="Current PCR value" />
-                    <ComboBox Grid.Row="2" Grid.Column="0" x:Name="ListOfAlgorithms"  Margin="20,10" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+                    <ComboBox Grid.Row="2" Grid.Column="0" x:Name="ListOfAlgorithms"  Margin="20,10" HorizontalAlignment="Stretch" VerticalAlignment="Top" SelectionChanged="ListOfAlgorithms_SelectionChanged" />
                     <Button Grid.Row="2" Grid.Column="1" x:Name="ResetPcr" Content="Reset" Margin="0,10,20,10" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="ResetPcr_Click" />
-                    <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Name="InputDescription" HorizontalAlignment="Left" Margin="20,10,20,10" TextWrapping="Wrap" Text="Insert binary data to extend here:" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Top"/>
-                    <TextBox Grid.Row="4" Grid.ColumnSpan="2" x:Name="Input" Margin="20,10" Width="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" PlaceholderText="Input binary data to extend here" />
-                    <Button Grid.Row="5" Grid.ColumnSpan="2" Content="Extend" HorizontalAlignment="Stretch" Margin="20,10,20,10" VerticalAlignment="Top" />
+                    <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Name="InputDescription" HorizontalAlignment="Left" Margin="20,10" TextWrapping="Wrap" Text="Insert binary data to extend here:" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Top"/>
+                    <TextBox Grid.Row="4" Grid.ColumnSpan="2" x:Name="Input" Margin="20,10" Width="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" PlaceholderText="Input hash to extend here" />
+                    <Button Grid.Row="5" Grid.ColumnSpan="2" x:Name="Extend" Content="Extend" HorizontalAlignment="Stretch" Margin="20,10" VerticalAlignment="Top" Click="Extend_Click" />
+                    <TextBlock Grid.Row="6" Grid.ColumnSpan="2" x:Name="ExtendDescription" HorizontalAlignment="Stretch" Margin="20,10" VerticalAlignment="Top" TextWrapping="Wrap" Text="" Style="{StaticResource BodyTextBlockStyle}"/>
                 </Grid>
             </StackPanel>
         </ScrollViewer>

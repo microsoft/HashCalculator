@@ -70,6 +70,10 @@ namespace HashCalculator
                 // convert from characters to values ('0' -> 0, etc.)
                 var inBuffer = CryptographicBuffer.DecodeFromHexString(input);
                 CryptographicBuffer.CopyToByteArray(inBuffer, out a);
+                if (a == null)
+                {
+                    return "";
+                }
             }
             else
             {

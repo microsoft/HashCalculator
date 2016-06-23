@@ -463,13 +463,13 @@
                                Height="1"
                                Fill="{ThemeResource SystemControlForegroundBaseLowBrush}"
                                Margin="16,0,16,6"/>
-                    <Button x:Name="FeedbackNavPaneButton"
+                    <!--<Button x:Name="FeedbackNavPaneButton"
                             Grid.Row="2"
                             Grid.Column="1"
                             Style="{StaticResource SplitViewPaneButtonStyle}"
                             Content="&#xE76E;"
                             AutomationProperties.Name="Feedback"
-                            ToolTipService.ToolTip="Feedback"/>
+                            ToolTipService.ToolTip="Feedback"/>-->
                     <Button x:Name="SettingsNavPaneButton"
                             Grid.Row="2"
                             Grid.Column="2"

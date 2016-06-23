@@ -35,7 +35,8 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <c:PageHeader x:Name="pageHeader">
@@ -63,6 +64,8 @@
                 </TextBlock>
             </StackPanel>
         </ScrollViewer>
+
+        <CheckBox Grid.Row="2" x:Name="DontShowLandingPage" Margin="20,10" Content="Don't show this page in the future." Checked="DontShowLandingPage_Checked" />
     </Grid>
 </Page>
 
