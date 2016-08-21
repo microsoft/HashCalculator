@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
 
-namespace HashCalculator
+namespace TPMPCRCalculator
 {
     class Worker
     {

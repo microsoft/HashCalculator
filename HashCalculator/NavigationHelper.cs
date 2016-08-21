@@ -6,7 +6,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace HashCalculator
+namespace TPMPCRCalculator
 {
     /// <summary>
     /// NavigationHelper aids in navigation between pages. It manages

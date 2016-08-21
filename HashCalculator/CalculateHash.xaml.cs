@@ -5,12 +5,12 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
-namespace HashCalculator.Views
+namespace TPMPCRCalculator.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class CalculateHash : Page
     {
         private readonly NavigationHelper m_NavigationHelper;
         private const string m_SettingSelectedHashAlgorithm = "hashSelectedHash";
@@ -18,7 +18,7 @@ namespace HashCalculator.Views
         private const string m_SettingOutput = "hashOutput";
         private const string m_SettingRawBytes = "hashRawBytes";
 
-        public MainPage()
+        public CalculateHash()
         {
             this.InitializeComponent();
             this.m_NavigationHelper = new NavigationHelper(this);

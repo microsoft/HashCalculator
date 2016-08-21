@@ -7,10 +7,10 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
-using HashCalculator.Controls;
-using HashCalculator.Views;
+using TPMPCRCalculator.Controls;
+using TPMPCRCalculator.Views;
 
-namespace HashCalculator
+namespace TPMPCRCalculator
 {
     /// <summary>
     /// The "chrome" layer of the app that provides top-level navigation with
@@ -25,15 +25,15 @@ namespace HashCalculator
             {
                 new NavMenuItem()
                 {
-                    Symbol = Symbol.Calculator,
-                    Label = "Hash Calculator",
-                    DestPage = typeof(MainPage)
-                },
-                new NavMenuItem()
-                {
                     Symbol = Symbol.Rename,
                     Label = "TPM PCRs",
                     DestPage = typeof(TpmPcrs)
+                },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.Calculator,
+                    Label = "Hash Calculator",
+                    DestPage = typeof(CalculateHash)
                 },
                 new NavMenuItem()
                 {

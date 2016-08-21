@@ -1,9 +1,9 @@
 ﻿<Page
-    x:Class="HashCalculator.Views.TpmPcrs"
+    x:Class="TPMPCRCalculator.Views.TpmPcrs"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:HashCalculator"
-    xmlns:ctl="using:HashCalculator.Controls"
+    xmlns:local="using:TPMPCRCalculator"
+    xmlns:ctl="using:TPMPCRCalculator.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     KeyDown="TpmPcr_KeyDown"

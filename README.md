@@ -1,8 +1,7 @@
 # HashCalculator
-Helper tool to calculate hashes of data
+Helper tool to calculate the value of TPM PCRs and hashes of data
 
-This project allows to calculate hashes of arbitrary data. This project also allows to perform extend operations for
-TPM PCRs.
+This project allows to calculate of the value of TPM PCRs and of hashes of arbitrary data. 
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact 

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("HashCalculator")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("TPM PCR Calculator")]
+[assembly: AssemblyDescription("calculates the hash of data and emulates computation of PCR")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("HashCalculator")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCompany("Microsoft Research")]
+[assembly: AssemblyProduct("TPM PCR Calculator")]
+[assembly: AssemblyCopyright("Copyright ©  2016 Microsoft Research")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

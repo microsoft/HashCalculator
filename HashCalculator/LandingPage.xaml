@@ -1,9 +1,9 @@
 ﻿<Page
-    x:Class="HashCalculator.Views.LandingPage"
+    x:Class="TPMPCRCalculator.Views.LandingPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:HashCalculator"
-    xmlns:c="using:HashCalculator.Controls"
+    xmlns:local="using:TPMPCRCalculator"
+    xmlns:c="using:TPMPCRCalculator.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
@@ -47,6 +47,12 @@
 
         <ScrollViewer Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True" Margin="12,4,0,0">
             <StackPanel x:Name="ContentContainer" Margin="12,0,24,0">
+                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}">TPM PCR Calculator</TextBlock>
+                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,4">This tool allows to calculate the content of a TPM PCR the way a TPM would do it.</TextBlock>
+                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,4">A Trusted Platform Module (TPM) Platform Configuration Register (PCR) is a register that can 
+                    only be reset to zero when the TPM device is reset and only modified by a one-way (or trap door) function called Extend. The Extend function concatenates the 
+                    existing value of the PCR with the parameter of the function and calculates a hash. The digest of the hash becomes the new value of the PCR.</TextBlock>
+
                 <TextBlock Style="{StaticResource SubtitleTextBlockStyle}">Hash Calculator Tool</TextBlock>
                 <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,4">This tool allows to perform different kinds of hash calculations.</TextBlock>
 

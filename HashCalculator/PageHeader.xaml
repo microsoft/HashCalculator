@@ -1,6 +1,6 @@
 ﻿<UserControl
     x:Name="Root"
-    x:Class="HashCalculator.Controls.PageHeader"
+    x:Class="TPMPCRCalculator.Controls.PageHeader"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"

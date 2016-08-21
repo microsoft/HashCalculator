@@ -6,10 +6,10 @@ using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
-using HashCalculator.Views;
+using TPMPCRCalculator.Views;
 using Windows.Storage;
 
-namespace HashCalculator
+namespace TPMPCRCalculator
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
@@ -89,7 +89,7 @@ namespace HashCalculator
                     // When the navigation stack isn't restored, navigate to the first page
                     // suppressing the initial entrance animation. Because landing page is disabled,
                     // got to first content page.
-                    shell.AppFrame.Navigate(typeof(MainPage), e.Arguments, new Windows.UI.Xaml.Media.Animation.SuppressNavigationTransitionInfo());
+                    shell.AppFrame.Navigate(typeof(CalculateHash), e.Arguments, new Windows.UI.Xaml.Media.Animation.SuppressNavigationTransitionInfo());
                 }
                 else
                 {

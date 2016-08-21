@@ -1,8 +1,8 @@
 ﻿<Application
-    x:Class="HashCalculator.Application"
+    x:Class="TPMPCRCalculator.Application"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:HashCalculator"
+    xmlns:local="using:TPMPCRCalculator"
     RequestedTheme="Light">
 
     <Application.Resources>
