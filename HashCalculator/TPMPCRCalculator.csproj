@@ -17,7 +17,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>HashCalculator_StoreKey.pfx</PackageCertificateKeyFile>
-    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
     <PackageCertificateThumbprint>5DE4AACD6D7448AF749450AC0745677A7CBC9EAC</PackageCertificateThumbprint>
@@ -107,24 +107,24 @@
     <Compile Include="AppShell.xaml.cs">
       <DependentUpon>AppShell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LandingPage.xaml.cs">
+    <Compile Include="Views\LandingPage.xaml.cs">
       <DependentUpon>LandingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CalculateHash.xaml.cs">
+    <Compile Include="Views\CalculateHash.xaml.cs">
       <DependentUpon>CalculateHash.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NavigationHelper.cs" />
-    <Compile Include="NavMenuItem.cs" />
-    <Compile Include="NavMenuListView.cs" />
-    <Compile Include="PageHeader.xaml.cs">
+    <Compile Include="Controls\NavigationHelper.cs" />
+    <Compile Include="Controls\NavMenuItem.cs" />
+    <Compile Include="Controls\NavMenuListView.cs" />
+    <Compile Include="Controls\PageHeader.xaml.cs">
       <DependentUpon>PageHeader.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings.xaml.cs">
+    <Compile Include="Views\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SuspensionManager.cs" />
-    <Compile Include="TpmPcrs.xaml.cs">
+    <Compile Include="Controls\SuspensionManager.cs" />
+    <Compile Include="Views\TpmPcrs.xaml.cs">
       <DependentUpon>TpmPcrs.xaml</DependentUpon>
     </Compile>
     <Compile Include="Worker.cs" />
@@ -153,23 +153,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LandingPage.xaml">
+    <Page Include="Views\LandingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CalculateHash.xaml">
+    <Page Include="Views\CalculateHash.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PageHeader.xaml">
+    <Page Include="Controls\PageHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Settings.xaml">
+    <Page Include="Views\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TpmPcrs.xaml">
+    <Page Include="Views\TpmPcrs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

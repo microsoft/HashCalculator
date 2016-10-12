@@ -1,89 +1,66 @@
 ﻿using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace TPMPCRCalculator.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class TpmPcrs : Page
+    public sealed partial class CalculateHash : Page
     {
-        private int m_CurrentAlgorithmIndex = 0;
         private readonly NavigationHelper m_NavigationHelper;
-        private const string m_SettingSelectedHashAlgorithm = "pcrSelectedHash";
-        private const string m_SettingInput = "pcrInput";
-        private const string m_SettingPCR = "pcrPCR";
-        private const string m_ExtendDescriptionTemplate =
-            "The Extend button concatenates the current PCR value with the provided input hash " +
-            "and then computes a hash of the concatenated value. " +
-            "This computed hash is then displayed as Current PCR Value.";
+        private const string m_SettingSelectedHashAlgorithm = "hashSelectedHash";
+        private const string m_SettingInput = "hashInput";
+        private const string m_SettingOutput = "hashOutput";
+        private const string m_SettingRawBytes = "hashRawBytes";
 
-        public TpmPcrs()
+        public CalculateHash()
         {
             this.InitializeComponent();
             this.m_NavigationHelper = new NavigationHelper(this);
             this.m_NavigationHelper.LoadState += LoadState;
             this.m_NavigationHelper.SaveState += SaveState;
 
-            string[] algorithms = Worker.GetHashingAlgorithms(true);
+            string[] algorithms = Worker.GetHashingAlgorithms();
             ListOfAlgorithms.Items.Clear();
             for (uint i = 0; i < algorithms.Length; i++)
             {
                 ListOfAlgorithms.Items.Add(algorithms[i]);
             }
-            ListOfAlgorithms.SelectedIndex = m_CurrentAlgorithmIndex;
-
-            PCR.Text = Worker.GetZeroDigestForAlgorithm((string)ListOfAlgorithms.SelectedItem);
-            ExtendDescription.Text = m_ExtendDescriptionTemplate;
+            ListOfAlgorithms.SelectedIndex = 0;
         }
 
-        private void ResetPcr_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            if (ListOfAlgorithms.SelectedIndex != -1)
-            {
-                PCR.Text = Worker.GetZeroDigestForAlgorithm((string)ListOfAlgorithms.SelectedItem);
-            }
-            ExtendDescription.Text = m_ExtendDescriptionTemplate;
-        }
-
-        private void Extend_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void GenerateHash_Click(object sender, RoutedEventArgs e)
         {
             string algorithmName = (string)ListOfAlgorithms.SelectedItem;
-            // if input cannot be hashed, don't change PCR values
-            string inputHash = Worker.ComputeHash(algorithmName, Input.Text, true);
-            if (inputHash != null &&
-                inputHash.Length > 0)
+            try
             {
-                string oldPCR = PCR.Text;
-                PCR.Text = Worker.ComputeHash(algorithmName, PCR.Text + Input.Text, true);
-                ExtendDescription.Text = m_ExtendDescriptionTemplate + "\n\n" +
-                    "Old PCR Value: " + oldPCR + "\n" +
-                    "Input Hash: " + Input.Text + "\n" +
-                    "Concatenated Value: " + oldPCR + Input.Text + "\n" +
-                    "New PCR Value: " + PCR.Text;
+                Output.Text = Worker.ComputeHash(algorithmName, Input.Text, RawBytes.IsChecked.Value);
+            }
+            catch (Exception ex)
+            {
+                if (!string.IsNullOrEmpty(ex.Message))
+                    Output.Text = ex.Message;
             }
         }
 
-        private void TpmPcr_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        private void MakeInput_Click(object sender, RoutedEventArgs e)
+        {
+            Input.Text = Output.Text;
+            Output.Text = "";
+        }
+
+        private void MainPage_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
             switch (e.Key)
             {
                 case Windows.System.VirtualKey.Enter:
-                    Extend_Click(sender, e);
+                    GenerateHash_Click(sender, e);
                     break;
-            }
-        }
-
-        private void ListOfAlgorithms_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (ListOfAlgorithms.SelectedIndex != m_CurrentAlgorithmIndex)
-            {
-                m_CurrentAlgorithmIndex = ListOfAlgorithms.SelectedIndex;
-                PCR.Text = Worker.GetZeroDigestForAlgorithm((string)ListOfAlgorithms.SelectedItem);
-                ExtendDescription.Text = m_ExtendDescriptionTemplate;
             }
         }
 
@@ -110,7 +87,6 @@ namespace TPMPCRCalculator.Views
                     if (index >= 0 && index < ListOfAlgorithms.Items.Count)
                     {
                         ListOfAlgorithms.SelectedIndex = index;
-                        m_CurrentAlgorithmIndex = index;
                     }
                 }
             }
@@ -120,9 +96,18 @@ namespace TPMPCRCalculator.Views
                 Input.Text = (string)SuspensionManager.SessionState[m_SettingInput];
             }
 
-            if (SuspensionManager.SessionState.ContainsKey(m_SettingPCR))
+            if (SuspensionManager.SessionState.ContainsKey(m_SettingOutput))
             {
-                PCR.Text = (string)SuspensionManager.SessionState[m_SettingPCR];
+                Output.Text = (string)SuspensionManager.SessionState[m_SettingOutput];
+            }
+
+            if (SuspensionManager.SessionState.ContainsKey(m_SettingRawBytes))
+            {
+                bool rawBytes;
+                if (Boolean.TryParse((string)SuspensionManager.SessionState[m_SettingRawBytes], out rawBytes))
+                {
+                    RawBytes.IsChecked = rawBytes;
+                }
             }
         }
 
@@ -138,7 +123,8 @@ namespace TPMPCRCalculator.Views
         {
             SuspensionManager.SessionState[m_SettingSelectedHashAlgorithm] = ListOfAlgorithms.SelectedIndex.ToString();
             SuspensionManager.SessionState[m_SettingInput] = Input.Text;
-            SuspensionManager.SessionState[m_SettingPCR] = PCR.Text;
+            SuspensionManager.SessionState[m_SettingOutput] = Output.Text;
+            SuspensionManager.SessionState[m_SettingRawBytes] = RawBytes.IsChecked.ToString();
         }
 
         #endregion

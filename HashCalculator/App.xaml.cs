@@ -2,25 +2,27 @@
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Controls;
 using TPMPCRCalculator.Views;
-using Windows.Storage;
+using Windows.Media.SpeechRecognition;
 
 namespace TPMPCRCalculator
 {
     /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
+    /// Provides application-specific behavior to supplement the default App class.
     /// </summary>
-    sealed partial class Application : Windows.UI.Xaml.Application
+    sealed partial class App : Application
     {
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
-        public Application()
+        public App()
         {
             Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
                 Microsoft.ApplicationInsights.WindowsCollectors.Metadata |
@@ -50,7 +52,7 @@ namespace TPMPCRCalculator
             ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
             if (titleBar != null)
             {
-                Color titleBarColor = (Color)Application.Current.Resources["SystemChromeMediumColor"];
+                Color titleBarColor = (Color)App.Current.Resources["SystemChromeMediumColor"];
                 titleBar.BackgroundColor = titleBarColor;
                 titleBar.ButtonBackgroundColor = titleBarColor;
             }
@@ -114,7 +116,7 @@ namespace TPMPCRCalculator
         }
 
         /// <summary>
-        /// Invoked when application execution is being suspended.  Application state is saved
+        /// Invoked when application execution is being suspended.  App state is saved
         /// without knowing whether the application will be terminated or resumed with the contents
         /// of memory still intact.
         /// </summary>

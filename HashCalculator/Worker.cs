@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
+using Windows.Storage.Streams;
 
 namespace TPMPCRCalculator
 {
@@ -67,12 +68,25 @@ namespace TPMPCRCalculator
             byte[] a;
             if (isByteArray)
             {
-                // convert from characters to values ('0' -> 0, etc.)
-                var inBuffer = CryptographicBuffer.DecodeFromHexString(input);
+                if (input.Length % 2 == 1)
+                {
+                    throw new Exception("\'" + input + "\' is missing a character to be a valid byte string.");
+                }
+                // making sure there are even number of characters.
+                IBuffer inBuffer = null;
+                try
+                {
+                    // convert from characters to values ('0' -> 0, etc.)
+                    inBuffer = CryptographicBuffer.DecodeFromHexString(input);
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("\'" + input + "\' is not a valid byte string.", e);
+                }
                 CryptographicBuffer.CopyToByteArray(inBuffer, out a);
                 if (a == null)
                 {
-                    return "";
+                    throw new Exception("\'" + input + "\' could not be converted into a byte stream.");
                 }
             }
             else
@@ -86,11 +100,15 @@ namespace TPMPCRCalculator
             }
 
             if (a.Length == 0)
-                return "";
+            {
+                throw new Exception("Byte array generated from \'" + input + "\' is empty.");
+            }
 
             byte[] encoded = ComputeHash(algorithm, a);
             if (encoded == null)
-                return "";
+            {
+                throw new Exception("Could not compute hash from \'" + input + "\'.");
+            }
 
             var buffer = CryptographicBuffer.CreateFromByteArray(encoded);
             var ret = CryptographicBuffer.EncodeToHexString(buffer);
