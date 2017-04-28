@@ -11,18 +11,19 @@ namespace TPMPCRCalculator.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CalculateHash : Page
+    public sealed partial class CalculateHMACHash : Page
     {
         private readonly NavigationHelper m_NavigationHelper;
-        private const string m_SettingSelectedHashAlgorithm = "hashSelectedHash";
-        private const string m_SettingInput = "hashInput";
-        private const string m_SettingSha1 = "hashSha1";
-        private const string m_SettingSha256 = "hashSha256";
-        private const string m_SettingSha384 = "hashSha384";
-        private const string m_SettingSha512 = "hashSha512";
-        private const string m_SettingRawBytes = "hashRawBytes";
+        private const string m_SettingSelectedHashAlgorithm = "hmacHashSelectedHash";
+        private const string m_SettingInput = "hmacHashInput";
+        private const string m_SettingKey = "hmacHashKey";
+        private const string m_SettingSha1 = "hmacHashSha1";
+        private const string m_SettingSha256 = "hmacHashSha256";
+        private const string m_SettingSha384 = "hmacHashSha384";
+        private const string m_SettingSha512 = "hmacHashSha512";
+        private const string m_SettingRawBytes = "hmacHashRawBytes";
 
-        public CalculateHash()
+        public CalculateHMACHash()
         {
             this.InitializeComponent();
             this.m_NavigationHelper = new NavigationHelper(this);
@@ -34,10 +35,10 @@ namespace TPMPCRCalculator.Views
         {
             try
             {
-                Sha1.Text = Worker.ComputeHash(HashAlgorithmNames.Sha1, Input.Text, RawBytes.IsChecked.Value);
-                Sha256.Text = Worker.ComputeHash(HashAlgorithmNames.Sha256, Input.Text, RawBytes.IsChecked.Value);
-                Sha384.Text = Worker.ComputeHash(HashAlgorithmNames.Sha384, Input.Text, RawBytes.IsChecked.Value);
-                Sha512.Text = Worker.ComputeHash(HashAlgorithmNames.Sha512, Input.Text, RawBytes.IsChecked.Value);
+                Sha1.Text = Worker.ComputeHmacHash(MacAlgorithmNames.HmacSha1, Input.Text, Key.Text, RawBytes.IsChecked.Value);
+                Sha256.Text = Worker.ComputeHmacHash(MacAlgorithmNames.HmacSha256, Input.Text, Key.Text, RawBytes.IsChecked.Value);
+                Sha384.Text = Worker.ComputeHmacHash(MacAlgorithmNames.HmacSha384, Input.Text, Key.Text, RawBytes.IsChecked.Value);
+                Sha512.Text = Worker.ComputeHmacHash(MacAlgorithmNames.HmacSha512, Input.Text, Key.Text, RawBytes.IsChecked.Value);
             }
             catch (Exception ex)
             {
@@ -74,6 +75,11 @@ namespace TPMPCRCalculator.Views
             if (SuspensionManager.SessionState.ContainsKey(m_SettingInput))
             {
                 Input.Text = (string)SuspensionManager.SessionState[m_SettingInput];
+            }
+
+            if (SuspensionManager.SessionState.ContainsKey(m_SettingKey))
+            {
+                Key.Text = (string)SuspensionManager.SessionState[m_SettingKey];
             }
 
             if (SuspensionManager.SessionState.ContainsKey(m_SettingSha1))
@@ -117,6 +123,7 @@ namespace TPMPCRCalculator.Views
         private void SaveState(object sender, SaveStateEventArgs e)
         {
             SuspensionManager.SessionState[m_SettingInput] = Input.Text;
+            SuspensionManager.SessionState[m_SettingKey] = Key.Text;
             SuspensionManager.SessionState[m_SettingSha1] = Sha1.Text;
             SuspensionManager.SessionState[m_SettingSha256] = Sha256.Text;
             SuspensionManager.SessionState[m_SettingSha384] = Sha384.Text;

@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="TPMPCRCalculator.Views.CalculateHash"
+    x:Class="TPMPCRCalculator.Views.CalculateHMACHash"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:TPMPCRCalculator"
@@ -40,7 +40,7 @@
 
         <ctl:PageHeader>
             <ctl:PageHeader.HeaderContent>
-                <TextBlock x:Name="title" Style="{StaticResource PageTitleTextBlockStyle}" Text="Hash Calculator"/>
+                <TextBlock x:Name="title" Style="{StaticResource PageTitleTextBlockStyle}" Text="Hash Calculator with HMAC key"/>
             </ctl:PageHeader.HeaderContent>
         </ctl:PageHeader>
 
@@ -51,6 +51,7 @@
                 <Grid Margin="0,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="100" />
                         <RowDefinition Height="100" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -66,16 +67,17 @@
 
                     <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="20,10,20,10" TextWrapping="Wrap" Text="Insert the text or data you want to hash into the first text box." Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Top"/>
                     <TextBox Grid.Row="1" Grid.ColumnSpan="2" x:Name="Input" Margin="20,10" Width="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" PlaceholderText="Input data to hash here" FontFamily="Consolas" />
-                    <CheckBox Grid.Row="2" Grid.ColumnSpan="2" x:Name="RawBytes"  Content="Input is raw bytes" HorizontalAlignment="Left" Margin="20,10,0,10" VerticalAlignment="Top" ToolTipService.ToolTip="Input text is treated as hexadecimal bytes. Whitespaces are removed." />
-                    <Button Grid.Row="3" Grid.ColumnSpan="2" Content="Generate Hash" HorizontalAlignment="Stretch" Margin="20,10,20,10" VerticalAlignment="Top" Click="GenerateHash_Click" />
-                    <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Margin="20,10" Text="SHA1:" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center"/>
-                    <TextBox Grid.Row="4" Grid.Column="1" x:Name="Sha1" Margin="0,10,20,10" TextWrapping="Wrap" VerticalAlignment="Stretch" IsReadOnly="True" PlaceholderText="Generated Hash" FontFamily="Consolas"/>
-                    <TextBlock Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" Margin="20,10" Text="SHA256:" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center"/>
-                    <TextBox Grid.Row="5" Grid.Column="1" x:Name="Sha256" Margin="0,10,20,10" TextWrapping="Wrap" VerticalAlignment="Stretch" IsReadOnly="True" PlaceholderText="Generated Hash" FontFamily="Consolas"/>
-                    <TextBlock Grid.Row="6" Grid.Column="0" HorizontalAlignment="Left" Margin="20,10" Text="SHA384:" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center"/>
-                    <TextBox Grid.Row="6" Grid.Column="1" x:Name="Sha384" Margin="0,10,20,10" TextWrapping="Wrap" VerticalAlignment="Stretch" IsReadOnly="True" PlaceholderText="Generated Hash" FontFamily="Consolas"/>
-                    <TextBlock Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left" Margin="20,10" Text="SHA512:" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center"/>
-                    <TextBox Grid.Row="7" Grid.Column="1" x:Name="Sha512" Margin="0,10,20,10" TextWrapping="Wrap" VerticalAlignment="Stretch" IsReadOnly="True" PlaceholderText="Generated Hash" FontFamily="Consolas"/>
+                    <TextBox Grid.Row="2" Grid.ColumnSpan="2" x:Name="Key" Margin="20,10" Width="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" PlaceholderText="HMAC key here" FontFamily="Consolas" />
+                    <CheckBox Grid.Row="3" Grid.ColumnSpan="2" x:Name="RawBytes"  Content="Input is raw bytes" HorizontalAlignment="Left" Margin="20,10,0,10" VerticalAlignment="Top" ToolTipService.ToolTip="Input text is treated as hexadecimal bytes. Whitespaces are removed." />
+                    <Button Grid.Row="4" Grid.ColumnSpan="2" Content="Generate Hash" HorizontalAlignment="Stretch" Margin="20,10,20,10" VerticalAlignment="Top" Click="GenerateHash_Click" />
+                    <TextBlock Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" Margin="20,10" Text="SHA1:" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="5" Grid.Column="1" x:Name="Sha1" Margin="0,10,20,10" TextWrapping="Wrap" VerticalAlignment="Stretch" IsReadOnly="True" PlaceholderText="Generated Hash" FontFamily="Consolas"/>
+                    <TextBlock Grid.Row="6" Grid.Column="0" HorizontalAlignment="Left" Margin="20,10" Text="SHA256:" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="6" Grid.Column="1" x:Name="Sha256" Margin="0,10,20,10" TextWrapping="Wrap" VerticalAlignment="Stretch" IsReadOnly="True" PlaceholderText="Generated Hash" FontFamily="Consolas"/>
+                    <TextBlock Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left" Margin="20,10" Text="SHA384:" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="7" Grid.Column="1" x:Name="Sha384" Margin="0,10,20,10" TextWrapping="Wrap" VerticalAlignment="Stretch" IsReadOnly="True" PlaceholderText="Generated Hash" FontFamily="Consolas"/>
+                    <TextBlock Grid.Row="8" Grid.Column="0" HorizontalAlignment="Left" Margin="20,10" Text="SHA512:" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="8" Grid.Column="1" x:Name="Sha512" Margin="0,10,20,10" TextWrapping="Wrap" VerticalAlignment="Stretch" IsReadOnly="True" PlaceholderText="Generated Hash" FontFamily="Consolas"/>
                 </Grid>
             </StackPanel>
         </ScrollViewer>

@@ -56,6 +56,9 @@
                 <TextBlock Style="{StaticResource SubtitleTextBlockStyle}">Hash Calculator Tool</TextBlock>
                 <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,4">This tool allows to perform different kinds of hash calculations.</TextBlock>
 
+                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}">HMAC Hash Calculator Tool</TextBlock>
+                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,4">This tool allows to perform different kinds of hash calculations using HMAC keys.</TextBlock>
+
                 <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,12,0,4">Overview</TextBlock>
                 <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,4">
                     A "hash" or "hash function" is a computation that maps variable sized input data to

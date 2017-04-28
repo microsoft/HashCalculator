@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Security.Cryptography;
@@ -12,20 +13,9 @@ namespace TPMPCRCalculator
 {
     class Worker
     {
-        public static string[] GetHashingAlgorithms(bool onlySHA = false)
+        public static string[] GetHashingAlgorithms()
         {
-            if (onlySHA)
-            {
-                return new[] {
-                    HashAlgorithmNames.Sha1,
-                    HashAlgorithmNames.Sha256,
-                    HashAlgorithmNames.Sha384,
-                    HashAlgorithmNames.Sha512
-                    };
-            }
-
             return new[] {
-                HashAlgorithmNames.Md5,
                 HashAlgorithmNames.Sha1,
                 HashAlgorithmNames.Sha256,
                 HashAlgorithmNames.Sha384,
@@ -65,14 +55,29 @@ namespace TPMPCRCalculator
 
         public static string ComputeHash(string algorithm, string input, bool isByteArray)
         {
-            byte[] a;
+            byte[] a = ConvertStringToByteArray(input, isByteArray);
+
+            byte[] encoded = ComputeHash(algorithm, a);
+            if (encoded == null)
+            {
+                throw new Exception("Could not compute hash from \'" + input + "\'.");
+            }
+
+            var buffer = CryptographicBuffer.CreateFromByteArray(encoded);
+            var ret = CryptographicBuffer.EncodeToHexString(buffer);
+
+            return ret;
+        }
+
+        private static byte[] ConvertStringToByteArray(string input, bool isByteArray)
+        {
+            byte[] byteArray = null;
             if (isByteArray)
             {
                 if (input.Length % 2 == 1)
                 {
                     throw new Exception("\'" + input + "\' is missing a character to be a valid byte string.");
                 }
-                // making sure there are even number of characters.
                 IBuffer inBuffer = null;
                 try
                 {
@@ -83,8 +88,8 @@ namespace TPMPCRCalculator
                 {
                     throw new Exception("\'" + input + "\' is not a valid byte string.", e);
                 }
-                CryptographicBuffer.CopyToByteArray(inBuffer, out a);
-                if (a == null)
+                CryptographicBuffer.CopyToByteArray(inBuffer, out byteArray);
+                if (byteArray == null)
                 {
                     throw new Exception("\'" + input + "\' could not be converted into a byte stream.");
                 }
@@ -92,22 +97,54 @@ namespace TPMPCRCalculator
             else
             {
                 int i = 0;
-                a = new byte[input.Length];
+                byteArray = new byte[input.Length];
                 foreach (char c in input)
                 {
-                    a[i++] = (byte)c;
+                    byteArray[i++] = (byte)c;
                 }
             }
-
-            if (a.Length == 0)
+            if (byteArray.Length == 0)
             {
                 throw new Exception("Byte array generated from \'" + input + "\' is empty.");
             }
+            return byteArray;
+        }
 
-            byte[] encoded = ComputeHash(algorithm, a);
+        public static byte[] ComputeHmacHash(string algorithm, byte[] input, byte[] key)
+        {
+            if (algorithm == MacAlgorithmNames.HmacSha1)
+            {
+                HMACSHA1 hmac = new HMACSHA1(key);
+                return hmac.ComputeHash(input);
+            }
+            else if (algorithm == MacAlgorithmNames.HmacSha256)
+            {
+                HMACSHA256 hmac = new HMACSHA256(key);
+                return hmac.ComputeHash(input);
+            }
+            else if (algorithm == MacAlgorithmNames.HmacSha384)
+            {
+                HMACSHA384 hmac = new HMACSHA384(key);
+                return hmac.ComputeHash(input);
+            }
+            else if (algorithm == MacAlgorithmNames.HmacSha512)
+            {
+                HMACSHA512 hmac = new HMACSHA512(key);
+                return hmac.ComputeHash(input);
+            }
+
+            return null;
+        }
+
+        public static string ComputeHmacHash(string algorithm, string input, string key, bool isByteArray)
+        {
+            byte[] inputArray = ConvertStringToByteArray(input, isByteArray);
+            byte[] keyArray = ConvertStringToByteArray(key, isByteArray);
+
+            byte[] encoded = ComputeHmacHash(algorithm, inputArray, keyArray);
             if (encoded == null)
             {
-                throw new Exception("Could not compute hash from \'" + input + "\'.");
+                throw new Exception("Could not compute HMAC hash from \'" + input + "\' with key \'" + key + "\'.");
             }
 
             var buffer = CryptographicBuffer.CreateFromByteArray(encoded);

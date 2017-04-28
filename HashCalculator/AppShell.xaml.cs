@@ -37,10 +37,16 @@ namespace TPMPCRCalculator
                 },
                 new NavMenuItem()
                 {
+                    Symbol = Symbol.Calculator,
+                    Label = "HMAC Hash Calculator",
+                    DestPage = typeof(CalculateHMACHash)
+                },
+                new NavMenuItem()
+                {
                     Symbol = Symbol.Setting,
                     Label = "Settings",
                     DestPage = typeof(Settings)
-                },
+                }
             });
 
         public static AppShell Current = null;

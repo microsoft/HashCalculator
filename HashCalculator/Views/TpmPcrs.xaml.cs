@@ -28,7 +28,7 @@ namespace TPMPCRCalculator.Views
             this.m_NavigationHelper.LoadState += LoadState;
             this.m_NavigationHelper.SaveState += SaveState;
 
-            string[] algorithms = Worker.GetHashingAlgorithms(true);
+            string[] algorithms = Worker.GetHashingAlgorithms();
             ListOfAlgorithms.Items.Clear();
             for (uint i = 0; i < algorithms.Length; i++)
             {

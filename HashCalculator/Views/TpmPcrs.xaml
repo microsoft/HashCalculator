@@ -64,11 +64,11 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Name="Description" HorizontalAlignment="Left" Margin="20,10" TextWrapping="Wrap" Text="Current PCR value:" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Top"/>
-                    <TextBox Grid.Row="1" Grid.ColumnSpan="2" x:Name="PCR" Margin="20,10" Width="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" IsReadOnly="True" PlaceholderText="Current PCR value" />
+                    <TextBox Grid.Row="1" Grid.ColumnSpan="2" x:Name="PCR" Margin="20,10" Width="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" IsReadOnly="True" PlaceholderText="Current PCR value" FontFamily="Consolas" />
                     <ComboBox Grid.Row="2" Grid.Column="0" x:Name="ListOfAlgorithms"  Margin="20,10" HorizontalAlignment="Stretch" VerticalAlignment="Top" SelectionChanged="ListOfAlgorithms_SelectionChanged" />
                     <Button Grid.Row="2" Grid.Column="1" x:Name="ResetPcr" Content="Reset" Margin="0,10,20,10" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="ResetPcr_Click" />
                     <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Name="InputDescription" HorizontalAlignment="Left" Margin="20,10" TextWrapping="Wrap" Text="Insert data to extend here (a hash in hexadecimal representation):" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Top"/>
-                    <TextBox Grid.Row="4" Grid.ColumnSpan="2" x:Name="Input" Margin="20,10" Width="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" PlaceholderText="Input hash to extend here" />
+                    <TextBox Grid.Row="4" Grid.ColumnSpan="2" x:Name="Input" Margin="20,10" Width="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" PlaceholderText="Insert hash to extend here" FontFamily="Consolas" />
                     <Button Grid.Row="5" Grid.ColumnSpan="2" x:Name="Extend" Content="Extend" HorizontalAlignment="Stretch" Margin="20,10" VerticalAlignment="Top" Click="Extend_Click" />
                     <TextBlock Grid.Row="6" Grid.ColumnSpan="2" x:Name="ExtendDescription" HorizontalAlignment="Stretch" Margin="20,10" VerticalAlignment="Top" TextWrapping="Wrap" Text="" Style="{StaticResource BodyTextBlockStyle}"/>
                 </Grid>
