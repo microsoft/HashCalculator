@@ -50,10 +50,17 @@
                 <Grid Margin="0,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                    <CheckBox Grid.Row="0" x:Name="DontShowLandingPage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,10" ToolTipService.ToolTip="Don't Show Landind page" Content="Don't Show Landing Page" Checked="DontShowLandingPage_Checked" Unchecked="DontShowLandingPage_Checked" />
+                    <CheckBox Grid.Row="0" Grid.ColumnSpan="2" x:Name="DontShowLandingPage" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,10" ToolTipService.ToolTip="Don't Show Landing page" Content="Don't Show Landing Page" Checked="DontShowLandingPage_Checked" Unchecked="DontShowLandingPage_Checked" />
+                    <TextBox Grid.Row="1" Grid.Column="0" Width="100" x:Name="InitialPCRValue" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="20,10,10,10" ToolTipService.ToolTip="Set the value that PCR has after PCR reset" TextChanged="InitialPCRValue_TextChanged"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="InitialPCRValueText" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10,10,20,10" ToolTipService.ToolTip="Set the value that PCR has after PCR reset" Text="Initial PCR Value"/>
                 </Grid>
             </StackPanel>
         </ScrollViewer>

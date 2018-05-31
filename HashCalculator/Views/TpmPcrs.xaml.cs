@@ -1,4 +1,5 @@
 ﻿using System;
+using Windows.Storage;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -11,6 +12,9 @@ namespace TPMPCRCalculator.Views
     /// </summary>
     public sealed partial class TpmPcrs : Page
     {
+        private ApplicationDataContainer m_RoamingSettings = null;
+        private const string m_InitialPcrValue = "InitialPcrValue";
+
         private int m_CurrentAlgorithmIndex = 0;
         private readonly NavigationHelper m_NavigationHelper;
         private const string m_SettingSelectedHashAlgorithm = "pcrSelectedHash";
@@ -24,6 +28,9 @@ namespace TPMPCRCalculator.Views
         public TpmPcrs()
         {
             this.InitializeComponent();
+
+            this.m_RoamingSettings = ApplicationData.Current.RoamingSettings;
+
             this.m_NavigationHelper = new NavigationHelper(this);
             this.m_NavigationHelper.LoadState += LoadState;
             this.m_NavigationHelper.SaveState += SaveState;
@@ -36,16 +43,27 @@ namespace TPMPCRCalculator.Views
             }
             ListOfAlgorithms.SelectedIndex = m_CurrentAlgorithmIndex;
 
-            PCR.Text = Worker.GetZeroDigestForAlgorithm((string)ListOfAlgorithms.SelectedItem);
+            ResetPcrText();
             ExtendDescription.Text = m_ExtendDescriptionTemplate;
         }
 
-        private void ResetPcr_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void ResetPcrText()
         {
             if (ListOfAlgorithms.SelectedIndex != -1)
             {
                 PCR.Text = Worker.GetZeroDigestForAlgorithm((string)ListOfAlgorithms.SelectedItem);
+                if (m_RoamingSettings.Values[m_InitialPcrValue] != null)
+                {
+                    String initialValue = String.Format("{0:x}", m_RoamingSettings.Values[m_InitialPcrValue]);
+                    int start = PCR.Text.Length - initialValue.Length;
+                    PCR.Text = PCR.Text.Remove(start, initialValue.Length).Insert(start, initialValue);
+                }
             }
+        }
+
+        private void ResetPcr_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            ResetPcrText();
             ExtendDescription.Text = m_ExtendDescriptionTemplate;
         }
 
