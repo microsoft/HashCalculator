@@ -54,9 +54,7 @@ namespace TPMPCRCalculator.Views
                 PCR.Text = Worker.GetZeroDigestForAlgorithm((string)ListOfAlgorithms.SelectedItem);
                 if (m_RoamingSettings.Values[m_InitialPcrValue] != null)
                 {
-                    String initialValue = String.Format("{0:x}", m_RoamingSettings.Values[m_InitialPcrValue]);
-                    int start = PCR.Text.Length - initialValue.Length;
-                    PCR.Text = PCR.Text.Remove(start, initialValue.Length).Insert(start, initialValue);
+                    PCR.Text = Worker.GetZeroDigestForAlgorithm((string)ListOfAlgorithms.SelectedItem, (int)m_RoamingSettings.Values[m_InitialPcrValue]);
                 }
             }
         }
@@ -110,7 +108,7 @@ namespace TPMPCRCalculator.Views
             if (ListOfAlgorithms.SelectedIndex != m_CurrentAlgorithmIndex)
             {
                 m_CurrentAlgorithmIndex = ListOfAlgorithms.SelectedIndex;
-                PCR.Text = Worker.GetZeroDigestForAlgorithm((string)ListOfAlgorithms.SelectedItem);
+                ResetPcrText();
                 ExtendDescription.Text = m_ExtendDescriptionTemplate;
             }
         }

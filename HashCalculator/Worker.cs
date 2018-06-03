@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Numerics;
 using System.Security.Cryptography;
@@ -28,7 +30,7 @@ namespace TPMPCRCalculator
             return HashAlgorithmProvider.OpenAlgorithm(algorithm).HashLength;
         }
 
-        public static string GetZeroDigestForAlgorithm(string algorithm)
+        public static string GetZeroDigestForAlgorithm(string algorithm, int initialValue = 0)
         {
             uint digestSize = GetDigestSizeForAlgorithm(algorithm);
 
@@ -37,6 +39,13 @@ namespace TPMPCRCalculator
 
             var buffer = CryptographicBuffer.CreateFromByteArray(zeroDigest);
             var ret = CryptographicBuffer.EncodeToHexString(buffer);
+
+            if (initialValue != 0)
+            {
+                string initialString = String.Format("{0:x}", initialValue);
+                int start = ret.Length - initialString.Length;
+                ret = ret.Remove(start, initialString.Length).Insert(start, initialString);
+            }
 
             return ret;
         }
@@ -67,6 +76,16 @@ namespace TPMPCRCalculator
             var ret = CryptographicBuffer.EncodeToHexString(buffer);
 
             return ret;
+        }
+
+        public static void ValidateIsHash(string algorithm, string input)
+        {
+            if (GetDigestSizeForAlgorithm(algorithm) != input.Length / 2)
+            {
+                throw new Exception("\'" + input + "\' is not the right length for hashing algorithm " + algorithm + ".");
+            }
+            // will throw exception if not valid byte string
+            byte[] a = ConvertStringToByteArray(input, true);
         }
 
         private static byte[] ConvertStringToByteArray(string input, bool isByteArray)
@@ -151,6 +170,21 @@ namespace TPMPCRCalculator
             var ret = CryptographicBuffer.EncodeToHexString(buffer);
 
             return ret;
+        }
+
+        public static int CheckIfRightHashOrder(string algorithm, int startValue, string[] hashes, string expectedResult)
+        {
+            string currentValue = GetZeroDigestForAlgorithm(algorithm, startValue);
+
+            for (int index = 0; index < hashes.Length; index++)
+            {
+                currentValue = ComputeHash(algorithm, currentValue + hashes[index], true);
+                if (String.Compare(currentValue, expectedResult) == 0)
+                {
+                    return index;
+                }
+            }
+            return -1;
         }
     }
 }

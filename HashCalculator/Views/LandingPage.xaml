@@ -59,6 +59,9 @@
                 <TextBlock Style="{StaticResource SubtitleTextBlockStyle}">HMAC Hash Calculator Tool</TextBlock>
                 <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,4">This tool allows to perform different kinds of hash calculations using HMAC keys.</TextBlock>
 
+                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}">Hash Permutation Tool</TextBlock>
+                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,4">Given a list of hashes and an expected rsult hash, this tool permutates through all hashes with all possible initial PCR values to determine which sequence results in the expected hash value. This is useful to validate if a hash has been measured or the order of hashes has been changed.</TextBlock>
+
                 <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,12,0,4">Overview</TextBlock>
                 <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,4">
                     A "hash" or "hash function" is a computation that maps variable sized input data to

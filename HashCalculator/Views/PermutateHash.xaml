@@ -1,0 +1,87 @@
+﻿<Page
+    x:Class="TPMPCRCalculator.Views.PermutateHash"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TPMPCRCalculator"
+    xmlns:ctl="using:TPMPCRCalculator.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    KeyDown="MainPage_KeyDown"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource MediumWindowSnapPoint}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Layoutroot.Margin" Value="12,0,0,0"/>
+                        <Setter Target="title.Style" Value="{StaticResource PageTitleTextBlockStyle}"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource MinWindowSnapPoint}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LayoutRoot.Margin" Value="0"/>
+                        <Setter Target="title.Style" Value="{StaticResource NarrowPageTitleTextBlockStyle}"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ctl:PageHeader>
+            <ctl:PageHeader.HeaderContent>
+                <TextBlock x:Name="title" Style="{StaticResource PageTitleTextBlockStyle}" Text="Hash Permutater"/>
+            </ctl:PageHeader.HeaderContent>
+        </ctl:PageHeader>
+
+        <ScrollViewer x:Name="LayoutRoot"
+                      Grid.Row="1" 
+                      Margin="24,0,0,0">
+            <StackPanel>
+                <Grid Margin="0,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="20,10" Text="Insert the text or data you want to hash into the first text box." Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Top"/>
+                    <ComboBox Grid.Row="1" Grid.Column="0" x:Name="ListOfAlgorithms"  Margin="20,10,10,10" HorizontalAlignment="Stretch" VerticalAlignment="Top" SelectionChanged="ListOfAlgorithms_SelectionChanged" />
+                    <Button Grid.Row="1" Grid.Column="1" x:Name="Reset" Content="Clear List" HorizontalAlignment="Stretch" Margin="10,10,20,10" VerticalAlignment="Top" Click="Reset_Click" />
+                    <TextBox Grid.Row="2" Grid.Column="0" x:Name="HashToAdd" Margin="20,10,10,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PlaceholderText="Insert hash to add to list" FontFamily="Consolas" />
+                    <Button Grid.Row="2" Grid.Column="1" x:Name="AddHash" Content="Add Hash" HorizontalAlignment="Stretch" Margin="10,10,20,10" VerticalAlignment="Top" Click="AddHash_Click" />
+                    <TextBox Grid.Row="3" Grid.Column="0" x:Name="ExpectedResultHash" Margin="20,10,10,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PlaceholderText="Insert expected result hash" FontFamily="Consolas" />
+                    <Button Grid.Row="3" Grid.Column="1" x:Name="PermutateHashes" Content="Permutate" Margin="10,10,20,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="PermutateHashes_Click" />
+                    <CheckBox Grid.Row="4" Grid.Column="0" x:Name="DontChangeHashOrder" Content="Do not change order of hashes" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource BodyTextBlockStyle}" Margin="20,10" ToolTipService.ToolTip="Select this checkbox to only test different initialization values of a PCR."/>
+                    <Button Grid.Row="4" Grid.Column="1" x:Name="Cancel" Content="Cancel" Margin="20,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Cancel_Click" />
+                    <TextBlock Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="20,10" Text="List of hashes to test with:" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Top" />
+                    <ListView Grid.Row="6" Grid.ColumnSpan="2" x:Name="Hashes" Margin="20,10" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontFamily="Consolas" BorderBrush="{StaticResource ListBoxBorderThemeBrush}"/>
+                    <TextBlock Grid.Row="7" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="20,10" Text="Order of hashes used to compute expected value" VerticalAlignment="Top" Style="{StaticResource BodyTextBlockStyle}" />
+                    <ListView Grid.Row="8" Grid.ColumnSpan="2" x:Name="ResultHashes" Margin="20,10" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontFamily="Consolas"  BorderBrush="{StaticResource ListBoxBorderThemeBrush}"/>
+                    <ProgressBar Grid.Row="8" Grid.Column="2" x:Name="PercentComputed" Margin="20,10" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

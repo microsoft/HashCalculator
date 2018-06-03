@@ -43,6 +43,12 @@ namespace TPMPCRCalculator
                 },
                 new NavMenuItem()
                 {
+                    Symbol = Symbol.Sort,
+                    Label = "Hash Permutater",
+                    DestPage = typeof(PermutateHash)
+                },
+                new NavMenuItem()
+                {
                     Symbol = Symbol.Setting,
                     Label = "Settings",
                     DestPage = typeof(Settings)
