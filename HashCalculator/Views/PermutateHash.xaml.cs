@@ -140,16 +140,16 @@ namespace TPMPCRCalculator.Views
 
         private void AddHash_Click(object sender, RoutedEventArgs e)
         {
-            string hash = HashToAdd.Text.Trim();
+            ResultHashes.Items.Clear();
             try
             {
+                string hash = HashToAdd.Text.Trim();
                 Worker.ValidateIsHash((string)ListOfAlgorithms.SelectedItem, hash);
                 Hashes.Items.Add(hash);
                 HashToAdd.Text = "";
             }
             catch (Exception ex)
             {
-                ResultHashes.Items.Clear();
                 ResultHashes.Items.Add(ex.Message);
             }
         }
@@ -165,20 +165,28 @@ namespace TPMPCRCalculator.Views
         private async void PermutateHashes_Click(object sender, RoutedEventArgs e)
         {
             bool found = false;
+            ResultHashes.Items.Clear();
             try
             {
-                cts = new CancellationTokenSource();
+                Worker.ValidateIsHash((string)ListOfAlgorithms.SelectedItem, ExpectedResultHash.Text.Trim());
 
-                ResultHashes.Items.Clear();
+                cts = new CancellationTokenSource();
                 found = await CheckAndUpdateAsync(cts.Token);
             }
             catch (OperationCanceledException)
             {
                 ResultHashes.Items.Add("Computation cancelled.");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ResultHashes.Items.Add("Computation failed.");
+                if (string.IsNullOrEmpty(ex.Message))
+                {
+                    ResultHashes.Items.Add("Computation failed.");
+                }
+                else
+                {
+                    ResultHashes.Items.Add(ex.Message);
+                }
             }
             finally
             {
@@ -238,6 +246,9 @@ namespace TPMPCRCalculator.Views
 
         private async Task<bool> CheckAndUpdateAsync(CancellationToken ct)
         {
+            if (Hashes.Items.Count == 0)
+                return false;
+
             int[] singlePermutation = new int[Hashes.Items.Count];
             for (int i = 0; i < Hashes.Items.Count; i++)
                 singlePermutation[i] = i;

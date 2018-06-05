@@ -74,11 +74,11 @@
                     <TextBox Grid.Row="3" Grid.Column="0" x:Name="ExpectedResultHash" Margin="20,10,10,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" PlaceholderText="Insert expected result hash" FontFamily="Consolas" />
                     <Button Grid.Row="3" Grid.Column="1" x:Name="PermutateHashes" Content="Permutate" Margin="10,10,20,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="PermutateHashes_Click" />
                     <CheckBox Grid.Row="4" Grid.Column="0" x:Name="DontChangeHashOrder" Content="Do not change order of hashes" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource BodyTextBlockStyle}" Margin="20,10" ToolTipService.ToolTip="Select this checkbox to only test different initialization values of a PCR."/>
-                    <Button Grid.Row="4" Grid.Column="1" x:Name="Cancel" Content="Cancel" Margin="20,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Cancel_Click" />
+                    <Button Grid.Row="4" Grid.Column="1" x:Name="Cancel" Content="Cancel" Margin="10,10,20,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="Cancel_Click" />
                     <TextBlock Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="20,10" Text="List of hashes to test with:" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Top" />
-                    <ListView Grid.Row="6" Grid.ColumnSpan="2" x:Name="Hashes" Margin="20,10" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontFamily="Consolas" BorderBrush="{StaticResource ListBoxBorderThemeBrush}"/>
+                    <ListView Grid.Row="6" Grid.ColumnSpan="2" x:Name="Hashes" Margin="20,10" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontFamily="Consolas" />
                     <TextBlock Grid.Row="7" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="20,10" Text="Order of hashes used to compute expected value" VerticalAlignment="Top" Style="{StaticResource BodyTextBlockStyle}" />
-                    <ListView Grid.Row="8" Grid.ColumnSpan="2" x:Name="ResultHashes" Margin="20,10" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontFamily="Consolas"  BorderBrush="{StaticResource ListBoxBorderThemeBrush}"/>
+                    <ListView Grid.Row="8" Grid.ColumnSpan="2" x:Name="ResultHashes" Margin="20,10" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontFamily="Consolas" />
                     <ProgressBar Grid.Row="8" Grid.Column="2" x:Name="PercentComputed" Margin="20,10" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
                 </Grid>
             </StackPanel>
