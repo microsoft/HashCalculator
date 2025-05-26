@@ -6,6 +6,7 @@ using System.Linq;
 using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
@@ -93,7 +94,10 @@ namespace TPMPCRCalculator
             byte[] byteArray = null;
             if (isByteArray)
             {
-                if (input.Length % 2 == 1)
+                // Remove all whitespace characters (spaces, tabs, newlines, etc.)
+                input = Regex.Replace(input, @"\s+", "");
+
+                if(input.Length % 2 == 1)
                 {
                     throw new Exception("\'" + input + "\' is missing a character to be a valid byte string.");
                 }

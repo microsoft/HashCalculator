@@ -51,7 +51,7 @@
                 <Grid Margin="0,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="100" />
+                        <RowDefinition Height="200" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -65,7 +65,8 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="20,10,20,10" TextWrapping="Wrap" Text="Insert the text or data you want to hash into the first text box." Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Top"/>
-                    <TextBox Grid.Row="1" Grid.ColumnSpan="2" x:Name="Input" Margin="20,10" Width="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" PlaceholderText="Input data to hash here" FontFamily="Consolas" />
+                    <TextBox Grid.Row="1" Grid.ColumnSpan="2" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                        x:Name="Input" Margin="20,10" Width="Auto" TextWrapping="Wrap" VerticalAlignment="Stretch" PlaceholderText="Input data to hash here" FontFamily="Consolas" />
                     <CheckBox Grid.Row="2" Grid.ColumnSpan="2" x:Name="RawBytes"  Content="Input is raw bytes" HorizontalAlignment="Left" Margin="20,10,0,10" VerticalAlignment="Top" ToolTipService.ToolTip="Input text is treated as hexadecimal bytes. Whitespaces are removed." />
                     <Button Grid.Row="3" Grid.ColumnSpan="2" Content="Generate Hash" HorizontalAlignment="Stretch" Margin="20,10,20,10" VerticalAlignment="Top" Click="GenerateHash_Click" />
                     <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left" Margin="20,10" Text="SHA1:" Style="{StaticResource BodyTextBlockStyle}" VerticalAlignment="Center"/>
